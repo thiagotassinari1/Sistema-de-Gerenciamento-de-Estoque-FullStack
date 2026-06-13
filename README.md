@@ -1,72 +1,123 @@
-# 📦 Sistema de Gerenciamento de Estoque (CRUD)
+# 📦 Sistema de Gerenciamento de Estoque
 
-![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-brightgreen)
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
 
-Este projeto é uma API RESTful completa desenvolvida como o **Trabalho Prático do Grau A** para a disciplina de **Implementação de Software** do curso de Análise e Desenvolvimento de Sistemas da Universidade do Vale do Rio dos Sinos (**Unisinos**).
+Projeto acadêmico desenvolvido como parte do **Trabalho Prático do Grau A** da disciplina de **Implementação de Software**, no curso de Análise e Desenvolvimento de Sistemas da Universidade do Vale do Rio dos Sinos (**Unisinos**).
 
-O sistema atua como uma barreira de integridade para o controle de pedidos de compra e reabastecimento de mercadorias, automatizando a validação de produtos e a atualização dinâmica do inventário para evitar falhas humanas e inconsistências no estoque.
-
----
-
-## 🏗️ Arquitetura e Conceitos
-
-O projeto foi construído seguindo os princípios da arquitetura **RESTful** e a separação de responsabilidades em camadas (**MVC**):
-
-* **Controller:** Responsável por expor os endpoints e gerenciar as requisições HTTP.
-* **Service:** Onde reside a lógica de negócio, incluindo o uso da anotação `@Transactional` para garantir a integridade das operações de banco de dados.
-* **Entity/Model:** Representação das tabelas do banco de dados relacional e objetos de domínio.
-* **Persistência:** Utiliza um banco de dados relacional com o suporte de um ORM para o mapeamento das entidades.
+A solução foi pensada como um sistema de controle de estoque com API REST no backend e interface web no frontend. O objetivo é apoiar o cadastro de produtos, categorias, fornecedores e pedidos, reduzindo erros no processo de reabastecimento e deixando a atualização do inventário mais consistente.
 
 ---
 
-## 🗂️ Entidades e Relacionamentos
+## Visão Geral
 
-O sistema gerencia quatro entidades principais que garantem o fluxo de reabastecimento:
+O repositório está organizado em duas partes:
 
-1.  **Produto:** Entidade central que armazena nome, descrição, quantidade em estoque e preço.
-2.  **Categoria:** Utilizada para classificar e agrupar os produtos do catálogo.
-3.  **Fornecedor:** Representa os parceiros comerciais (nome e CNPJ) responsáveis pelo fornecimento dos itens.
-4.  **Pedido:** Ordem de compra que vincula um produto a um fornecedor, registrando a data e a quantidade solicitada.
+* **Backend (`estoque/`)**: API REST desenvolvida com **Java 17**, **Spring Boot 3.5**, **Spring Data JPA**, **Bean Validation** e **PostgreSQL**.
+* **Frontend (`estoque-front/`)**: aplicação web em **Vue 3** com **Vite**, **Vue Router** e **Axios**, consumindo a API do backend.
 
-**Cardinalidade:**
-* **Categoria (1:N) Produto:** Uma categoria agrupa muitos produtos.
-* **Fornecedor (1:N) Pedido:** Um fornecedor pode receber diversos pedidos.
-* **Produto (1:N) Pedido:** Um item pode ser reabastecido através de múltiplos pedidos ao longo do tempo.
+Essa separação permite evoluir a interface e as regras de negócio de forma independente, mantendo o backend responsável pela integridade dos dados e o frontend focado na experiência de uso.
 
 ---
 
-## 🛣️ Rotas da API (Endpoints)
+## Arquitetura
 
-Abaixo estão listadas as principais rotas implementadas no sistema:
+O backend segue uma organização em camadas, com responsabilidades bem definidas:
 
-### Produtos
+* **Controller:** expõe os endpoints HTTP.
+* **Service:** concentra a lógica de negócio e validações de fluxo.
+* **Repository:** faz o acesso ao banco de dados.
+* **Entity:** representa as tabelas e relações do domínio.
+* **Exception Handler:** centraliza o tratamento de erros da API.
+
+No frontend, a interface está estruturada com componentes reutilizáveis, composables para reaproveitamento de lógica e rotas dedicadas para listagem e formulário de produtos.
+
+---
+
+## Entidades
+
+O sistema trabalha com quatro entidades principais:
+
+1. **Produto:** item central do estoque, com nome, descrição, preço, quantidade e categoria.
+2. **Categoria:** classifica os produtos do catálogo.
+3. **Fornecedor:** representa os parceiros comerciais responsáveis pelo abastecimento.
+4. **Pedido:** registra a solicitação de compra e o vínculo entre produto e fornecedor.
+
+---
+
+## Backend
+
+O backend expõe uma API REST para operações de cadastro, consulta, atualização e remoção. Entre os recursos já presentes no projeto estão:
+
+* CRUD de **produtos**.
+* CRUD de **categorias**.
+* CRUD de **fornecedores**.
+* Operações de **pedidos** com atualização de estoque.
+* Documentação da API via **Swagger/OpenAPI**.
+
+### Principais rotas
+
+#### Produtos
 | Método | URL | Finalidade |
 | :--- | :--- | :--- |
-| `POST` | `/produtos` | Registrar novos produtos no estoque. |
-| `GET` | `/produtos/todos` | Listar todos os produtos cadastrados. |
-| `PUT` | `/produtos/{id}` | Atualizar informações de um produto específico. |
-| `DELETE` | `/produtos/{id}` | Remover um produto do sistema. |
+| `GET` | `/produtos` | Listar produtos com suporte a paginação e filtros. |
+| `GET` | `/produtos/{id}` | Buscar um produto específico. |
+| `POST` | `/produtos` | Cadastrar um novo produto. |
+| `PUT` | `/produtos/{id}` | Atualizar um produto existente. |
+| `DELETE` | `/produtos/{id}` | Remover um produto. |
 
-### Pedidos (Lógica de Negócio)
+#### Categorias
 | Método | URL | Finalidade |
 | :--- | :--- | :--- |
-| `POST` | `/pedidos` | Registrar pedido e **atualizar automaticamente** o estoque do produto. |
-| `DELETE` | `/pedidos/{id}` | Cancelar um pedido e reverter a quantidade do estoque. |
+| `GET` | `/categorias/todas` | Listar todas as categorias disponíveis. |
 
-> **Nota:** Rotas similares de CRUD completo estão disponíveis para **Categorias** e **Fornecedores**.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-* **Java / Spring Boot** (Back-end RESTful).
-* **Banco de Dados Relacional** (PostgreSQL).
-* **Swagger / Postman:** Para documentação e testes das chamadas da API.
-* **ORM (JPA/Hibernate):** Para persistência e mapeamento de dados.
+#### Pedidos
+| Método | URL | Finalidade |
+| :--- | :--- | :--- |
+| `POST` | `/pedidos` | Registrar pedido e atualizar o estoque do produto. |
+| `DELETE` | `/pedidos/{id}` | Cancelar um pedido e reverter a quantidade no estoque. |
 
 ---
 
-## 👥 Integrantes do Grupo
+## Frontend
+
+A interface web foi construída em **Vue 3** com **Vite** e consome a API via **Axios**. Nesta etapa do projeto, o frontend está focado no fluxo de produtos e categorias.
+
+### Funcionalidades atuais
+
+* Listagem paginada de produtos.
+* Filtro por nome na listagem.
+* Cadastro e edição de produtos.
+* Exclusão de produtos.
+* Seleção de categoria no formulário.
+* Roteamento para tela de listagem e formulário.
+
+### Rotas do frontend
+
+* `/produtos` - listagem de produtos.
+* `/produtos/novo` - cadastro de produto.
+* `/produtos/:id/editar` - edição de produto.
+
+### Tecnologias do frontend
+
+* **Vue 3**
+* **Vite**
+* **Vue Router**
+* **Axios**
+
+---
+
+## Tecnologias Utilizadas
+
+* **Java 17** e **Spring Boot** no backend.
+* **JPA/Hibernate** para persistência.
+* **PostgreSQL** como banco relacional.
+* **Swagger/OpenAPI** para documentação da API.
+* **Vue 3** e **Vite** no frontend.
+* **Axios** para consumo da API.
+
+---
+
+## Integrantes do Grupo
 
 * Luiz Otávio
 * Nicolas Toldo
