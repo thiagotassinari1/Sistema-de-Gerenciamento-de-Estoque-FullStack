@@ -2,7 +2,7 @@
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
 
-Projeto acadêmico desenvolvido como parte do **Trabalho Prático do Grau A** da disciplina de **Implementação de Software**, no curso de Análise e Desenvolvimento de Sistemas da Universidade do Vale do Rio dos Sinos (**Unisinos**).
+Projeto acadêmico desenvolvido como parte do **Trabalho Prático do Grau A (Backend)** e **Trabalho Prático do Grau B (Frontend)** da disciplina de **Implementação de Software**, no curso de Análise e Desenvolvimento de Sistemas da Universidade do Vale do Rio dos Sinos (**Unisinos**).
 
 A solução foi pensada como um sistema de controle de estoque com API REST no backend e interface web no frontend. O objetivo é apoiar o cadastro de produtos, categorias, fornecedores e pedidos, reduzindo erros no processo de reabastecimento e deixando a atualização do inventário mais consistente.
 
@@ -103,6 +103,12 @@ A interface web foi construída em **Vue 3** com **Vite** e consome a API via **
 * **Vite**
 * **Vue Router**
 * **Axios**
+
+---
+
+## Backend Individual
+
+Caso tenha interesse no código backend individualmente, acesse [este repositório](https://github.com/thiagotassinari1/Sistema-de-Gerenciamento-de-Estoque-CRUD.git).
 
 ---
 
