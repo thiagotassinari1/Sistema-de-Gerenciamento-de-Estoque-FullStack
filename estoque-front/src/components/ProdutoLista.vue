@@ -11,9 +11,8 @@ defineEmits(['deletar', 'buscar', 'proxima', 'anterior', 'limparFiltros', 'mudar
 <template>
   <PainelLista titulo="Produtos" :total="pagina.totalItens" :carregando="carregando" :erro="erro" :vazio="vazio"
     @atualizar="$emit('buscar')">
-    
-    <ProdutoFiltros :filtros="filtros" @buscar="carregar(true)" @limpar="limparFiltros" />
-    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #eee;" />
+
+    <ProdutoFiltros :filtros="filtros" @buscar="$emit('buscar')" @limpar="$emit('limparFiltros')" />
 
     <div class="produto-grid">
       <ProdutoCard v-for="produto in produtos" :key="produto.id" :produto="produto"

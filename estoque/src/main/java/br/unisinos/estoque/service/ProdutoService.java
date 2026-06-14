@@ -2,6 +2,7 @@ package br.unisinos.estoque.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,6 @@ public class ProdutoService {
     private final CategoriaRepository categoriaRepository;
 
     public ProdutoResponseDTO salvar(ProdutoRequestDTO produtoDTO) {
-
         Categoria categoria = categoriaRepository.findById(produtoDTO.getCategoriaId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         "Categoria não encontrada com id: " + produtoDTO.getCategoriaId()));
@@ -38,7 +38,6 @@ public class ProdutoService {
         produto.setCategoria(categoria);
 
         Produto produtoSalvo = produtoRepository.save(produto);
-
         return toResponseDTO(produtoSalvo);
     }
 
@@ -57,29 +56,21 @@ public class ProdutoService {
         produto.setCategoria(categoria);
 
         Produto produtoSalvo = produtoRepository.save(produto);
-
         return toResponseDTO(produtoSalvo);
     }
 
     public List<ProdutoResponseDTO> listarTodos() {
-
         List<Produto> produtos = produtoRepository.findAll();
-
         List<ProdutoResponseDTO> listaProdutosDTO = new ArrayList<>();
-
         for (Produto produto : produtos) {
-            ProdutoResponseDTO dto = toResponseDTO(produto);
-            listaProdutosDTO.add(dto);
+            listaProdutosDTO.add(toResponseDTO(produto));
         }
-
         return listaProdutosDTO;
     }
 
     public ProdutoResponseDTO buscarPorId(Long id) {
-
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com o id: " + id));
-
         return toResponseDTO(produto);
     }
 
@@ -87,11 +78,10 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    public Page<ProdutoResponseDTO> buscar(String nome, Long categoriaId, Pageable pageable) {
-        return produtoRepository.buscarComFiltros(nome, categoriaId, pageable).map(this::toResponseDTO);
+    public Page<ProdutoResponseDTO> buscar(String nome, Long categoriaId, BigDecimal precoMin, BigDecimal precoMax, Pageable pageable) {
+        return produtoRepository.buscarComFiltros(nome, categoriaId, precoMin, precoMax, pageable).map(this::toResponseDTO);
     }
 
-    // ResponseDTO padrão para todos os métodos necessários
     public ProdutoResponseDTO toResponseDTO(Produto produto) {
         ProdutoResponseDTO produtoDTO = new ProdutoResponseDTO();
         produtoDTO.setId(produto.getId());
@@ -104,7 +94,6 @@ public class ProdutoService {
             produtoDTO.setCategoriaId(produto.getCategoria().getId());
             produtoDTO.setNomeCategoria(produto.getCategoria().getNome());
         }
-
         return produtoDTO;
     }
 }

@@ -1,6 +1,7 @@
 package br.unisinos.estoque.controller;
 
 import java.util.List;
+import java.math.BigDecimal;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/produtos")
 @RequiredArgsConstructor
-
 public class ProdutoController {
 
     private final ProdutoService produtoService;
@@ -51,12 +51,10 @@ public class ProdutoController {
     public ResponseEntity<ProdutoResponseDTO> buscarPorId(@PathVariable Long id) {
         ProdutoResponseDTO produtoDTO = produtoService.buscarPorId(id);
         return ResponseEntity.ok(produtoDTO);
-
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
-
         produtoService.buscarPorId(id);
         produtoService.excluir(id);
         return ResponseEntity.noContent().build();
@@ -66,7 +64,9 @@ public class ProdutoController {
     public ResponseEntity<Page<ProdutoResponseDTO>> buscar(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) Long categoriaId,
+            @RequestParam(required = false) BigDecimal precoMin,
+            @RequestParam(required = false) BigDecimal precoMax,
             Pageable pageable) {
-        return ResponseEntity.ok(produtoService.buscar(nome, categoriaId, pageable));
+        return ResponseEntity.ok(produtoService.buscar(nome, categoriaId, precoMin, precoMax, pageable));
     }
 }
