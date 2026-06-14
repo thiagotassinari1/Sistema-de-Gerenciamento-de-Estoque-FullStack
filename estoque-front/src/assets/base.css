@@ -385,3 +385,203 @@ button:disabled {
   justify-content: center;
   align-items: center;
 }
+
+.botao-novo-produto {
+  background-color: var(--primary);
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  font-weight: bold;
+}
+
+.botao-novo-produto:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ========== FILTROS ========== */
+
+.filtros {
+  margin-bottom: 20px;
+}
+
+.filtros-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.filtros-header-btn {
+  display: flex;
+  width: 11vw;
+  justify-content: space-between;
+}
+
+.filtros-header h3 {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.campo {
+  display: grid;
+  gap: 6px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.campo span {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.campo input,
+.campo select {
+  width: 100%-1;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+  background: var(--surface);
+  transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.campo small {
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* ========== FORM BUTTONS ========== */
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-buttons button,
+.form-buttons .btn-container {
+  flex: 1;
+}
+
+.form-buttons button {
+  width: 100%;
+}
+
+.btn-cancelar {
+  background: var(--text-muted);
+  width: 100%;
+}
+
+.btn-cancelar:hover {
+  background: #475569;
+}
+
+.btn-cancelar-link {
+  flex: 1;
+  text-decoration: none;
+}
+
+/* ========== STATUS MESSAGES ========== */
+
+.status-success {
+  border-color: var(--success);
+  color: var(--success);
+  margin-bottom: 20px;
+}
+
+.status-message {
+  margin-bottom: 20px;
+}
+
+/* ========== HEADER DIVIDER ========== */
+
+.header-divider {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ========== PAGE HEADER ========== */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-header h2 {
+  margin: 0;
+  color: var(--text-main);
+}
+
+/* ========== CATEGORIA LISTA ========== */
+
+.categoria-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categoria-lista li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+
+.categoria-lista li:last-child {
+  border-bottom: none;
+}
+
+.categoria-lista li > div:first-child {
+  flex: 1;
+}
+
+.categoria-lista strong {
+  color: var(--text-main);
+}
+
+.categoria-lista span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ========== PAGINACAO SELECT ========== */
+
+.paginacao-tamanho {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.paginacao-tamanho select {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font: inherit;
+  cursor: pointer;
+}
+
+.paginacao-tamanho select:focus {
+  outline: none;
+  border-color: var(--primary);
+}

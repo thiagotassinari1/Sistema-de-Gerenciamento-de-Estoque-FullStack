@@ -95,11 +95,11 @@ onMounted(async () => {
             <p v-if="erroFormulario" class="form-error">{{ erroFormulario }}</p>
             <p v-if="mensagemSucesso" class="form-success">{{ mensagemSucesso }}</p>
 
-            <div style="display: flex; gap: 10px;">
-                <button type="submit" :disabled="salvando" style="flex: 1;">
+            <div class="form-buttons">
+                <button type="submit" :disabled="salvando">
                     {{ salvando ? 'Salvando...' : 'Salvar Categoria' }}
                 </button>
-                <button type="button" @click="router.push('/categorias')" style="flex: 1; background: #64748b;">
+                <button type="button" class="btn-cancelar" @click="router.push('/categorias')">
                     Cancelar
                 </button>
             </div>

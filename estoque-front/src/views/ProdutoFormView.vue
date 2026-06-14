@@ -5,10 +5,10 @@
       <p>Preencha os campos abaixo para {{ isEdicao ? 'atualizar o' : 'cadastrar um novo' }} produto.</p>
     </div>
 
-    <div v-if="mensagemErro" class="status status-error" style="margin-bottom: 20px;">
+    <div v-if="mensagemErro" class="status status-error status-message">
       {{ mensagemErro }}
     </div>
-    <div v-if="mensagemSucesso" class="status" style="border-color: var(--success); color: var(--success); margin-bottom: 20px;">
+    <div v-if="mensagemSucesso" class="status status-success">
       {{ mensagemSucesso }}
     </div>
 
@@ -66,13 +66,13 @@
         </select>
       </label>
 
-      <div style="display: flex; gap: 10px; margin-top: 20px;">
-        <button type="submit" :disabled="salvando" style="flex: 1;">
+      <div class="form-buttons">
+        <button type="submit" :disabled="salvando">
           {{ salvando ? 'Salvando...' : 'Salvar Produto' }}
         </button>
         
-        <router-link to="/produtos" style="flex: 1; text-decoration: none;">
-          <button type="button" style="width: 100%; background: #64748b;">
+        <router-link to="/produtos" class="btn-cancelar-link">
+          <button type="button" class="btn-cancelar">
             Cancelar
           </button>
         </router-link>

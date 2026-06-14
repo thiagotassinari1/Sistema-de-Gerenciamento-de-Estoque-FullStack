@@ -29,29 +29,28 @@ onMounted(async () => {
 
 <template>
     <section class="filtros">
-        <header class="filtros-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <header class="filtros-header">
             <h3>Filtros</h3>
-            <div>
-                <button type="button" @click="$emit('limpar')" style="margin-right: 10px;">Limpar</button>
+            <div class="filtros-header-btn">
+                <button type="button" @click="$emit('limpar')">Limpar</button>
                 <button type="button" @click="$emit('buscar')">Buscar</button>
             </div>
         </header>
 
-        <div class="filtros-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div class="filtros-grid">
             <label class="campo">
-                <span style="display: block; margin-bottom: 0.5rem;">Buscar por nome</span>
+                <span>Buscar por nome</span>
                 <input 
                     type="search" 
                     v-model="props.filtros.nome" 
                     @keyup.enter="$emit('buscar')" 
                     placeholder="Ex.: notebook"
-                    style="width: 100%; padding: 0.5rem;"
                 >
             </label>
 
             <label class="campo">
-                <span style="display: block; margin-bottom: 0.5rem;">Categoria</span>
-                <select v-model="props.filtros.categoriaId" @change="$emit('buscar')" style="width: 100%; padding: 0.5rem;">
+                <span>Categoria</span>
+                <select v-model="props.filtros.categoriaId" @change="$emit('buscar')">
                     <option :value="null">Todas</option>
                     <option 
                         v-for="categoria in categorias"
@@ -60,30 +59,28 @@ onMounted(async () => {
                         {{ categoria.nome }}
                     </option>
                 </select>
-                <small v-if="erroCategorias" style="color: red;">
+                <small v-if="erroCategorias">
                     {{ erroCategorias }}
                 </small>
             </label>
 
             <label class="campo">
-                <span style="display: block; margin-bottom: 0.5rem;">Preço mínimo</span>
+                <span>Preço mínimo</span>
                 <input 
                     type="number" min="0" step="0.01" 
                     v-model.number="props.filtros.precoMin" 
                     @keyup.enter="$emit('buscar')" 
                     placeholder="0,00"
-                    style="width: 100%; padding: 0.5rem;"
                 >
             </label>
 
             <label class="campo">
-                <span style="display: block; margin-bottom: 0.5rem;">Preço máximo</span>
+                <span>Preço máximo</span>
                 <input 
                     type="number" min="0" step="0.01" 
                     v-model.number="props.filtros.precoMax" 
                     @keyup.enter="$emit('buscar')" 
                     placeholder="0,00"
-                    style="width: 100%; padding: 0.5rem;"
                 >
             </label>
         </div>

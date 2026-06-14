@@ -9,19 +9,49 @@ defineEmits(['deletar', 'buscar', 'proxima', 'anterior', 'limparFiltros', 'mudar
 </script>
 
 <template>
-  <PainelLista titulo="Produtos" :total="pagina.totalItens" :carregando="carregando" :erro="erro" :vazio="vazio"
-    @atualizar="$emit('buscar')">
+  <div class="produto-lista-view">
+    
+    <header class="page-header">
+      <h2>Produtos</h2>
+      <router-link to="/produtos/novo" class="botao botao-novo-produto">
+        + Novo Produto
+      </router-link>
+    </header>
 
-    <ProdutoFiltros :filtros="filtros" @buscar="$emit('buscar')" @limpar="$emit('limparFiltros')" />
+    <ProdutoFiltros 
+      :filtros="filtros" 
+      @buscar="$emit('buscar')" 
+      @limpar="$emit('limparFiltros')" 
+    />
+    
+    <hr class="header-divider" />
 
-    <div class="produto-grid">
-      <ProdutoCard v-for="produto in produtos" :key="produto.id" :produto="produto"
-        @deletar="$emit('deletar', produto.id)" />
-    </div>
+    <PainelLista :carregando="carregando" :erro="erro" :vazio="vazio">
+      
+      <div class="produto-grid">
+        <ProdutoCard 
+          v-for="produto in produtos" 
+          :key="produto.id" 
+          :produto="produto"
+          @deletar="$emit('deletar', produto.id)" 
+        />
+      </div>
 
-    <ProdutoPaginacao :numero-humano="numeroHumano" :total-paginas="pagina.totalPaginas"
-      :total-itens="pagina.totalItens" :itens-exibidos="produtos.length" :tamanho="pagina.tamanho"
-      :primeira="pagina.primeira" :ultima="pagina.ultima" :desabilitado="carregando" @anterior="$emit('anterior')"
-      @proxima="$emit('proxima')" @mudar-tamanho="$emit('mudarTamanho', $event)" />
-  </PainelLista>
+      <ProdutoPaginacao 
+        v-if="pagina"
+        :numero-humano="numeroHumano" 
+        :total-paginas="pagina.totalPaginas"
+        :total-itens="pagina.totalItens" 
+        :itens-exibidos="produtos.length" 
+        :tamanho="pagina.tamanho"
+        :primeira="pagina.primeira" 
+        :ultima="pagina.ultima" 
+        :desabilitado="carregando" 
+        @anterior="$emit('anterior')"
+        @proxima="$emit('proxima')" 
+        @mudar-tamanho="$emit('mudarTamanho', $event)" 
+      />
+      
+    </PainelLista>
+  </div>
 </template>
