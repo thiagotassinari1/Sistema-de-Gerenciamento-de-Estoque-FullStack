@@ -5,14 +5,26 @@ import { useFiltro } from '../composables/useFiltro';
 import { buscarProdutosPaginados, excluirProduto } from '../services/produtoService';
 import ProdutoLista from '../components/ProdutoLista.vue';
 
-const { filtros, limpar: limparFiltros } = useFiltro({ nome: '' });
+// 1. Adicione os novos campos no estado inicial
+const { filtros, limpar: limparFiltros } = useFiltro({ 
+  nome: '', 
+  categoriaId: null, 
+  precoMin: null, 
+  precoMax: null 
+});
 
+// 2. Passe esses campos para o backend quando buscar os produtos
 const {
   itens, carregando, erro, vazio, pagina, numeroHumano,
   carregar, proxima, anterior, reiniciar, mudarTamanho
 } = useListagemPaginada(
   (opcoes) => buscarProdutosPaginados({ 
-    page: opcoes.page, size: opcoes.size, nome: filtros.nome 
+    page: opcoes.page, 
+    size: opcoes.size, 
+    nome: filtros.nome,
+    categoriaId: filtros.categoriaId,
+    precoMin: filtros.precoMin,
+    precoMax: filtros.precoMax
   }),
   { tamanhoInicial: 10 }
 );
