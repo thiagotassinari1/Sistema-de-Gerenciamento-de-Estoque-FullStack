@@ -123,8 +123,98 @@ Caso tenha interesse no código backend individualmente, acesse [este repositór
 
 ---
 
+## Como Executar
+
+### Backend
+
+**Pré-requisitos:** Java 17, Maven e PostgreSQL instalados e rodando localmente.
+
+1. Acesse a pasta do backend:
+   ```bash
+   cd estoque
+   ```
+2. Copie o arquivo de exemplo e configure suas credenciais:
+   ```bash
+   cp src/main/resources/application.properties.example src/main/resources/application.properties
+   ```
+3. Edite o `application.properties` com o usuário e senha do seu PostgreSQL local e certifique-se de que o banco de dados informado existe.
+4. Execute a aplicação:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+   A API estará disponível em `http://localhost:8080`.
+
+### Frontend
+
+**Pré-requisitos:** Node.js 18 ou superior.
+
+1. Acesse a pasta do frontend:
+   ```bash
+   cd estoque-front
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Copie o arquivo de variáveis de ambiente:
+   ```bash
+   cp .env.example .env
+   ```
+4. Defina a URL do backend no `.env`:
+   ```
+   VITE_API_URL=http://localhost:8080
+   ```
+5. Inicie a aplicação:
+   ```bash
+   npm run dev
+   ```
+   O frontend estará disponível em `http://localhost:5173`.
+
+---
+
+## Variável de Ambiente
+
+| Variável | Descrição | Valor padrão |
+| :--- | :--- | :--- |
+| `VITE_API_URL` | URL base da API REST do backend | `http://localhost:8080` |
+
+---
+
+## Rotas do Frontend
+
+| Rota | Finalidade |
+| :--- | :--- |
+| `/produtos` | Listagem paginada de produtos com filtro por nome e categoria |
+| `/produtos/novo` | Formulário de cadastro de produto |
+| `/produtos/:id/editar` | Formulário de edição de produto existente |
+| `/categorias` | Listagem de todas as categorias cadastradas |
+| `/categorias/nova` | Formulário de cadastro de categoria |
+| `/categorias/:id/editar` | Formulário de edição de categoria existente |
+| `/fornecedores` | Listagem de todos os fornecedores cadastrados |
+| `/fornecedores/novo` | Formulário de cadastro de fornecedor |
+| `/fornecedores/:id/editar` | Formulário de edição de fornecedor existente |
+| `/pedidos` | Listagem de pedidos com opção de cancelamento |
+| `/pedidos/novo` | Formulário de criação de novo pedido |
+
+---
+
+## Bibliotecas Adicionais do Frontend
+
+| Biblioteca | Justificativa |
+| :--- | :--- |
+| **Vue Router** | Gerenciamento de rotas e navegação entre as telas da aplicação |
+| **Axios** | Realização de requisições HTTP à API REST, centralizada na camada de services |
+
+---
+
+## Vídeo de Apresentação
+
+Link: 
+
+---
+
 ## Integrantes do Grupo
 
 * Luiz Otávio
-* Nicolas Toldo
+* Nicolas Kauer Toldo
 * Thiago Tassinari

@@ -1,16 +1,9 @@
 <script setup>
+import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-  <header class="app-header">
-    <div class="container header-content">
-      <strong>Gestão de Estoque</strong>
-      <nav class="toolbar-acoes">
-        <router-link to="/produtos">Produtos</router-link>
-        <router-link to="/categorias">Categorias</router-link>
-      </nav>
-    </div>
-  </header>
+  <AppHeader />
 
   <main class="container page-title">
     <p class="eyebrow">Painel Administrativo</p>
