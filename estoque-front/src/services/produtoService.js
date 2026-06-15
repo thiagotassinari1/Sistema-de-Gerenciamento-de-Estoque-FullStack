@@ -1,13 +1,12 @@
 import { api } from "./api";
 
 export const buscarProdutosPaginados = async (filtros) => {
-    // Começamos apenas com a paginação
+    
     const params = {
         page: filtros.page,
         size: filtros.size
     };
 
-    // Só adicionamos os filtros se eles não forem nulos ou vazios
     if (filtros.nome) params.nome = filtros.nome;
     if (filtros.categoriaId) params.categoriaId = filtros.categoriaId;
     if (filtros.precoMin) params.precoMin = filtros.precoMin;

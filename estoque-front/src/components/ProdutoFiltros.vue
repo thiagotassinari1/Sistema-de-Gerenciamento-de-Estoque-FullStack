@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-// Importa o serviço do SEU projeto
 import { listarCategorias } from '../services/categoriaService';
 
 const props = defineProps({
@@ -10,7 +9,6 @@ const props = defineProps({
     }
 })
 
-// Adicionamos o evento 'buscar' que o seu projeto já usava
 defineEmits(['limpar', 'buscar'])
 
 const categorias = ref([])

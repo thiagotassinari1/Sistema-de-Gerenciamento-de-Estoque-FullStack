@@ -5,7 +5,6 @@ import { useFiltro } from '../composables/useFiltro';
 import { buscarProdutosPaginados, excluirProduto } from '../services/produtoService';
 import ProdutoLista from '../components/ProdutoLista.vue';
 
-// 1. Adicione os novos campos no estado inicial
 const { filtros, limpar: limparFiltros } = useFiltro({ 
   nome: '', 
   categoriaId: null, 
@@ -13,7 +12,6 @@ const { filtros, limpar: limparFiltros } = useFiltro({
   precoMax: null 
 });
 
-// 2. Passe esses campos para o backend quando buscar os produtos
 const {
   itens, carregando, erro, vazio, pagina, numeroHumano,
   carregar, proxima, anterior, reiniciar, mudarTamanho
