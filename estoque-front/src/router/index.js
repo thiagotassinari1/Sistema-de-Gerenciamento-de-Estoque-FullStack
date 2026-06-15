@@ -3,6 +3,10 @@ import ProdutoListaView from '../views/ProdutoListaView.vue'
 import ProdutoFormView from '../views/ProdutoFormView.vue'
 import CategoriaListaView from '../views/CategoriaListaView.vue'
 import CategoriaFormView from '../views/CategoriaFormView.vue'
+import FornecedorListaView from '../views/FornecedorListaView.vue'
+import FornecedorFormView from '../views/FornecedorFormView.vue'
+import PedidoListaView from '../views/PedidoListaView.vue'
+import PedidoFormView from '../views/PedidoFormView.vue'
 
 const routes = [
   { path: '/', redirect: '/produtos' },
@@ -12,6 +16,11 @@ const routes = [
   { path: '/categorias', name: 'CategoriasLista', component: CategoriaListaView },
   { path: '/categorias/nova', name: 'CategoriaNova', component: CategoriaFormView },
   { path: '/categorias/:id/editar', name: 'CategoriaEditar', component: CategoriaFormView },
+  { path: '/fornecedores', name: 'FornecedoresLista', component: FornecedorListaView },
+  { path: '/fornecedores/novo', name: 'FornecedorNovo', component: FornecedorFormView },
+  { path: '/fornecedores/:id/editar', name: 'FornecedorEditar', component: FornecedorFormView },
+  { path: '/pedidos', name: 'PedidosLista', component: PedidoListaView },
+  { path: '/pedidos/novo', name: 'PedidoNovo', component: PedidoFormView },
 ]
 
 const router = createRouter({
